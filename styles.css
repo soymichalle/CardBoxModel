@@ -1,0 +1,146 @@
+* {
+  box-sizing: border-box;
+}
+
+/* ===== 1. Variables: la paleta de la marca ===== */
+
+:root {
+    --negro: #0D1117;
+    --azul: #161B22;
+    --gris-claro: #8B949E;
+    --gris-oscuro: #30363D;
+    --verde: #7EE787;
+    --rojo: #FF7B72;
+    --blanco: #E6EDF3;
+
+    --fuente-texto: Arial, sans-serif;
+}
+
+/* ===== 2. Estilos generales ===== */
+
+html {
+    font-size: 100%;
+}
+
+body {
+    margin: 0;
+    background-color: var(--negro);
+    color: var(--gris-claro);
+    font-family: var(--fuente-texto);
+    font-size: 1.125rem;
+    line-height: 1.6;
+}
+
+/* ===== 3. Encabezado ===== */
+
+.encabezado {
+    padding: 0.5em 1.5rem;
+    background-color: var(--azul);
+    color: var(--blanco);
+    text-align: center;
+    border-bottom: 0.0625rem solid var(--gris-oscuro);
+}
+
+/* ===== 4. Contenedor principal ===== */
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    padding: 2rem 5%;
+    box-sizing: border-box;
+}
+
+/* ===== 5. Tarjeta de la credencial ===== */
+
+.credencial {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    width: 90%;
+    max-width: 60rem;
+
+    padding: 2rem;
+    border: 0.25rem solid var(--gris-oscuro);
+    border-radius: 1.5rem;
+
+    background-color: var(--azul);
+
+    box-sizing: border-box;
+}
+
+/* ===== 6. Perfil y fotografía ===== */
+
+.perfil {
+    flex: 0 0 38%;
+    text-align: center;
+}
+
+.foto {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+
+    border: 0.25rem solid var(--gris-oscuro);
+    border-radius: 1rem;
+
+    background-color: var(--negro);
+
+    box-sizing: border-box;
+}
+
+/* ===== 7. Nombre ===== */
+
+.perfil h2 {
+    color: var(--blanco);
+    font-size: 1.5rem;
+    overflow-wrap: anywhere;
+}
+
+/* ===== 8. Información personal ===== */
+
+.datos {
+    flex: 1;
+    min-width: 0;
+}
+
+.datos h1 {
+    color: var(--verde);
+    font-size: 1.75rem;
+    line-height: 1.2;
+}
+
+.datos h3 {
+    color: var(--gris-claro);
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.datos p {
+    overflow-wrap: anywhere;
+}
+
+.datos strong {
+    color: var(--blanco);
+}
+
+/* ===== 9. Enlace a GitHub ===== */
+
+.datos a {
+    display: inline-block;
+
+    margin-top: 1rem;
+    padding: 0.5em 1.25em;
+
+    color: var(--verde);
+    border: 0.0625rem solid var(--verde);
+    border-radius: 0.5rem;
+
+    text-decoration: none;
+}
+
+.datos a:hover {
+    background-color: var(--verde);
+    color: var(--negro);
+}
