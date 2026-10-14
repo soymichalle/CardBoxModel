@@ -1,146 +1,330 @@
+/* Aplica box-sizing a todos los elementos para facilitar el cálculo de tamaños */
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-/* ===== 1. Variables: la paleta de la marca ===== */
-
+/* Variables globales de colores y tipografía */
 :root {
     --negro: #0D1117;
     --azul: #161B22;
     --gris-claro: #8B949E;
     --gris-oscuro: #30363D;
-    --verde: #7EE787;
+    --azul-clarito: #2c86bb;
     --rojo: #FF7B72;
     --blanco: #E6EDF3;
-
     --fuente-texto: Arial, sans-serif;
 }
 
-/* ===== 2. Estilos generales ===== */
-
-html {
-    font-size: 100%;
-}
-
+/* Estilos generales de toda la página */
 body {
     margin: 0;
+    /* Elimina los márgenes predeterminados */
     background-color: var(--negro);
     color: var(--gris-claro);
     font-family: var(--fuente-texto);
-    font-size: 1.125rem;
-    line-height: 1.6;
+    font-size: 1rem;
 }
 
-/* ===== 3. Encabezado ===== */
-
+/* Encabezado principal de la página */
 .encabezado {
-    padding: 0.5em 1.5rem;
+    padding: 0.5rem 1rem;
     background-color: var(--azul);
     color: var(--blanco);
     text-align: center;
-    border-bottom: 0.0625rem solid var(--gris-oscuro);
+    border-bottom: 1px solid var(--gris-oscuro);
+    /* Aqui dejé 1px porque namas hacemos una línea pa que se vea bonis ;) */
+    letter-spacing: 0.12em;
+    font-size: 0.8rem;
+    font-weight: bold;
 }
 
-/* ===== 4. Contenedor principal ===== */
-
+/* Centra la credencial horizontalmente y le da espacio vertical */
 main {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 70vh;
-    padding: 2rem 5%;
-    box-sizing: border-box;
+    min-height: 85vh;
+    padding: 2rem 1rem;
 }
 
-/* ===== 5. Tarjeta de la credencial ===== */
-
+/* Contenedor principal de la credencial */
 .credencial {
+    
+    /* Referencia para elementos posicionados dentro */
+    position: relative;
     display: flex;
+    
+    /* Permite que los elementos pasen a otra línea */
+    flex-wrap: wrap;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
 
-    width: 90%;
-    max-width: 60rem;
-
-    padding: 2rem;
-    border: 0.25rem solid var(--gris-oscuro);
-    border-radius: 1.5rem;
+    /* Limita el ancho máximo del padre */
+    width: 100%;
+    max-width: 48rem;
+    padding: 6rem 2rem 5rem; /* Toco poner mucho espacio porque quedaba feisimo si no*/
 
     background-color: var(--azul);
+    border: 1px solid var(--gris-oscuro);
+    /* Aqui dejé 1px porque namas hacemos una línea pa que se vea bonis ;) */
+    
+    /* Esquinas redondeadas */
+    border-radius: 1rem;
+    
+    /* Sombra exterior */
+    box-shadow: 0 1rem 3rem #00000055;
 
-    box-sizing: border-box;
+    /* Evitemo que el contenido sobresalga del contenedor de la tarjeta*/
+    overflow: hidden;
 }
 
-/* ===== 6. Perfil y fotografía ===== */
+/* Cabecera interior de la credencial */
+.cabecera-carnet {
+    position: absolute;
 
+    top: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; /*12 pixeles entre los divs de cabecera carnet*/ 
+
+    padding: 1rem 1.5rem;
+    background-color: var(--negro);
+    border-bottom: 2px solid var(--azul-clarito);
+    /* Aqui dejé 2px porque namas hacemos una línea pa que se vea bonis ;) */
+}
+
+/* Recuadro que contiene el símbolo o logotipo */
+.marca {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 2.75rem;
+    height: 2.75rem;
+    flex-shrink: 0;
+    /* Evita que el recuadro se encoja */
+
+    color: var(--negro);
+    background-color: var(--azul-clarito);
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Título y subtítulo de la cabecera */
+.cabecera-carnet h2 {
+    margin: 0;
+    color: var(--blanco);
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+}
+
+.cabecera-carnet p {
+    margin: 0.3rem 0 0;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+}
+
+/* Indicador del estado de la credencial */
+.estado {
+    margin-left: auto;
+    /* Desplaza el estado hacia la derecha */
+    padding: 0.35rem 0.5rem;
+    color: var(--azul-clarito);
+    border: 1px solid var(--azul-clarito);
+    /* Aqui dejé 1px porque namas hacemos una línea pa que se vea bonis ;) */
+    border-radius: 0.3rem;
+    font-size: 0.65rem;
+    font-weight: bold;
+}
+
+/* Contenedor de la fotografía y el perfil */
 .perfil {
-    flex: 0 0 38%;
+    flex: 0 1 10rem;
+    /*  0 1 10rem Define el tamaño flexible inicial
+        | |  └── flex-basis: 10rem tamaño inicial
+        | └───── flex-shrink: 1 puede encogerse si es necesario
+        └─────── flex-grow: 0 no crece para ocupar el espacio libre
+    */
+    min-width: 0;
     text-align: center;
 }
 
+/* Marco de la fotografía */
 .foto {
+    
+    /* La foto ocupa el total del contenedor padre */
+    position: relative;
     width: 100%;
+
+    /* Para que pueda mantener una proporción vertical */
     aspect-ratio: 3 / 4;
 
-    border: 0.25rem solid var(--gris-oscuro);
-    border-radius: 1rem;
+    /* Recorta las partes de la imagen que quedan fuera del marco */
+    overflow: hidden;
 
     background-color: var(--negro);
-
-    box-sizing: border-box;
+    border: 2px solid var(--azul-clarito);
+    /* Aqui dejé 2px porque namas hacemos una línea pa que se vea bonis ;) */
+    border-radius: 0.75rem;
 }
 
-/* ===== 7. Nombre ===== */
+/* Ajusta la imagen al espacio disponible sin deformarla */
+.foto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Sirve para ajustar la foto al espacio */
+    object-position: center;
+}
 
-.perfil h2 {
+/* Código identificador y tipo de perfil */
+.codigo {
+    margin: 0.8rem 0 0.4rem;
     color: var(--blanco);
-    font-size: 1.5rem;
+    font-size: 0.75rem;
+    font-weight: bold;
     overflow-wrap: anywhere;
+    /* Permite dividir textos largos */
 }
 
-/* ===== 8. Información personal ===== */
+.tipo {
+    margin: 0;
+    color: var(--azul-clarito);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+}
 
+/* Sección que contiene los datos personales */
 .datos {
-    flex: 1;
+    flex: 1 1 17rem;
+    /*  0 1 10rem Define el tamaño flexible inicial
+        | |  └── flex-basis: 17rem tamaño inicial
+        | └───── flex-shrink: 1 puede encogerse si es necesario
+        └─────── flex-grow: 1  crece para ocupar el espacio libre
+    */
+    /* Ocupa el espacio disponible */
     min-width: 0;
 }
 
+/* Etiqueta superior que identifica la información */
+.etiqueta {
+    margin: 0;
+    color: var(--azul-clarito);
+    font-size: 0.7rem;
+    font-weight: bold;
+    letter-spacing: 0.12em;
+}
+
+/* Nombre principal, con tamaño adaptable a la pantalla */
 .datos h1 {
-    color: var(--verde);
-    font-size: 1.75rem;
+    margin: 0.4rem 0;
+    color: var(--blanco);
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
     line-height: 1.2;
-}
-
-.datos h3 {
-    color: var(--gris-claro);
-    font-size: 1rem;
-    font-weight: normal;
-}
-
-.datos p {
     overflow-wrap: anywhere;
 }
 
-.datos strong {
+/* Subtítulos y área profesional */
+.datos h2 {
+    margin: 0.5rem 0 0.25rem;
+    color: var(--blanco);
+    font-size: 1rem;
+}
+
+.area {
+    margin: 0 0 1.25rem;
+    color: var(--gris-claro);
+    font-size: 0.9rem;
+}
+
+/* Organiza cada dato junto a su icono */
+.detalle {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin: 0.85rem 0;
+}
+
+/* Estilos de los iconos de cada dato */
+.detalle i {
+    width: 1.25rem;
+    padding-top: 0.15rem;
+    color: var(--azul-clarito);
+    text-align: center;
+}
+
+/* Texto descriptivo de los datos */
+.detalle p {
+    margin: 0;
+    font-size: 0.85rem;
+    overflow-wrap: anywhere;
+}
+
+/* Destaca los títulos de cada dato */
+.detalle strong {
+    display: inline-block;
+    margin-bottom: 0.2rem;
     color: var(--blanco);
 }
 
-/* ===== 9. Enlace a GitHub ===== */
-
+/* Estilo del enlace para convertirlo visualmente en un botón */
 .datos a {
     display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.65rem 1rem;
 
-    margin-top: 1rem;
-    padding: 0.5em 1.25em;
-
-    color: var(--verde);
-    border: 0.0625rem solid var(--verde);
-    border-radius: 0.5rem;
+    color: var(--azul-clarito);
+    border: 1px solid var(--azul-clarito);
+    /* Aqui dejé 1px porque namas hacemos una línea pa que se vea bonis ;) */
+    border-radius: 0.4rem;
 
     text-decoration: none;
+    /* Elimina el subrayado */
+    font-size: 0.85rem;
+    transition: background-color 0.2s, color 0.2s;
 }
 
+/* Cambia los colores del enlace cuando se pasa el cursor */
 .datos a:hover {
-    background-color: var(--verde);
+    background-color: var(--azul-clarito);
     color: var(--negro);
+}
+
+/* Franja inferior de la credencial con una frase */
+.frase {
+
+    /* posicion concreta pues */
+    position: absolute;
+
+    /* pega elemento a bordes */
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    padding: 0.8rem 1rem;
+    background-color: var(--negro);
+    border-top: 1px solid var(--gris-oscuro);
+    /* Aqui dejé 1px porque namas hacemos una línea pa que se vea bonis ;) */
+    text-align: center;
+}
+
+/* Apariencia del texto de la frase */
+.frase p {
+    margin: 0 0 0.25rem;
+    /* bottom 4 px*/
+    color: var(--blanco);
+    font-size: 0.95rem;
+    font-style: italic;
+}
+
+/* Pie de página del sitio */
+footer {
+    padding: 1rem;
+    color: var(--gris-claro);
+    text-align: center;
+    font-size: 0.75rem;
 }
